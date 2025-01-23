@@ -3,143 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products Management - Market System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Product Management - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .product-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .stock-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-footer {
+            background: transparent;
+            border-top: none;
+        }
+        .search-box {
+            max-width: 400px;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex">
-        <?php include 'components/sidebar.php'; ?>
-        
-        <div class="flex-1 flex flex-col">
-            <?php include 'components/header.php'; ?>
-            
-            <main class="flex-1 p-6">
-                <!-- Page Title and Actions -->
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-semibold text-gray-800">Products Management</h1>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-                            onclick="document.getElementById('addProductModal').classList.remove('hidden')">
-                        <i class="fas fa-plus mr-2"></i>Add New Product
+<body class="bg-light">
+<div class="container-fluid py-4">
+    <!-- Header Section -->
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-4">
+            <h2 class="mb-0">Product Management</h2>
+        </div>
+        <div class="col-md-4">
+            <div class="search-box mx-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search products...">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
-
-                <!-- Filters and Search -->
-                <div class="bg-white p-4 rounded-lg shadow mb-6">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="relative">
-                            <input type="text" placeholder="Search products..." 
-                                class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
-                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                        </div>
-                        <select class="border rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500">
-                            <option value="">All Categories</option>
-                            <option value="electronics">Electronics</option>
-                            <option value="clothing">Clothing</option>
-                            <option value="food">Food & Beverages</option>
-                        </select>
-                        <select class="border rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500">
-                            <option value="">Stock Status</option>
-                            <option value="in_stock">In Stock</option>
-                            <option value="low_stock">Low Stock</option>
-                            <option value="out_of_stock">Out of Stock</option>
-                        </select>
-                        <select class="border rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500">
-                            <option value="">Sort By</option>
-                            <option value="name_asc">Name (A-Z)</option>
-                            <option value="name_desc">Name (Z-A)</option>
-                            <option value="price_asc">Price (Low to High)</option>
-                            <option value="price_desc">Price (High to Low)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Product Card -->
-                    <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow">
-                        <img src="https://via.placeholder.com/300" alt="Product" class="w-full h-48 object-cover rounded-t-lg">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-800">Product Name</h3>
-                            <p class="text-sm text-gray-600 mb-2">Category: Electronics</p>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-lg font-bold text-blue-600">$299.99</span>
-                                <span class="text-sm text-gray-500">Stock: 45</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <button class="text-blue-600 hover:text-blue-700">
-                                    <i class="fas fa-edit mr-1"></i>Edit
-                                </button>
-                                <button class="text-red-600 hover:text-red-700">
-                                    <i class="fas fa-trash mr-1"></i>Delete
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat product cards -->
-                </div>
-
-                <!-- Add Product Modal -->
-                <div id="addProductModal" class="fixed inset-0 bg-black bg-opacity-50 hidden">
-                    <div class="bg-white rounded-lg w-full max-w-2xl mx-auto mt-20 p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-semibold">Add New Product</h2>
-                            <button onclick="this.closest('#addProductModal').classList.add('hidden')"
-                                    class="text-gray-500 hover:text-gray-700">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <form class="space-y-4">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium mb-1">Product Name</label>
-                                    <input type="text" class="w-full border rounded-lg px-3 py-2">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium mb-1">Category</label>
-                                    <select class="w-full border rounded-lg px-3 py-2">
-                                        <option value="">Select Category</option>
-                                        <option value="electronics">Electronics</option>
-                                        <option value="clothing">Clothing</option>
-                                        <option value="food">Food & Beverages</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium mb-1">Price</label>
-                                    <input type="number" step="0.01" class="w-full border rounded-lg px-3 py-2">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium mb-1">Stock Quantity</label>
-                                    <input type="number" class="w-full border rounded-lg px-3 py-2">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-1">Description</label>
-                                <textarea rows="3" class="w-full border rounded-lg px-3 py-2"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-1">Product Image</label>
-                                <input type="file" class="w-full border rounded-lg px-3 py-2">
-                            </div>
-                            <div class="flex justify-end space-x-3">
-                                <button type="button" 
-                                        onclick="this.closest('#addProductModal').classList.add('hidden')"
-                                        class="px-4 py-2 border rounded-lg text-gray-600 hover:bg-gray-100">
-                                    Cancel
-                                </button>
-                                <button type="submit" 
-                                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                                    Add Product
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </main>
+            </div>
+        </div>
+        <div class="col-md-4 text-end">
+            <div class="btn-group">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <i class="fas fa-plus"></i> Add Product
+                </button>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="fas fa-filter"></i> Filter
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">All Products</a></li>
+                    <li><a class="dropdown-item" href="#">In Stock</a></li>
+                    <li><a class="dropdown-item" href="#">Out of Stock</a></li>
+                    <li><a class="dropdown-item" href="#">On Sale</a></li>
+                </ul>
+            </div>
         </div>
     </div>
+
+    <!-- Products Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4">
+        <!-- Product Card Template -->
+        <div class="col">
+            <div class="card product-card">
+                <span class="badge bg-success stock-badge">In Stock</span>
+                <img src="product1.jpg" class="card-img-top product-img" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">Product Name</h5>
+                    <p class="card-text text-primary fw-bold">$99.99</p>
+                    <p class="card-text small text-muted">Stock: 15 units</p>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group w-100">
+                        <button class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat similar product cards -->
+    </div>
+</div>
+
+<!-- Add Product Modal -->
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm"  action="/saveProduct"  method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter product name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input type="text" name="description" class="form-control" placeholder="Enter description" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input type="number" name="price"  class="form-control" placeholder="Enter price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Stock Quantity</label>
+                        <input type="number" name="stock" class="form-control" placeholder="Enter stock quantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Unit</label>
+                        <select class="form-select" required>
+                            <option value="" disabled selected>Select unit</option>
+                            <option value="piece">Piece</option>
+                            <option value="kg">Kilogram</option>
+                            <option value="liter">Liter</option>
+                            <option value="box">Box</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Product Image</label>
+                        <input type="file" class="form-control" accept="image/*" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

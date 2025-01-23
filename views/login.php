@@ -110,14 +110,14 @@
     </div>
 
     <!-- Login Form -->
-    <form>
+    <form METHOD="POST">
         <div class="mb-4">
-            <input type="text" class="form-control" placeholder="Telefon yoki Email" required>
+            <input name="login" type="text" class="form-control" placeholder="Login" required>
         </div>
         <div class="mb-4">
-            <input type="password" class="form-control" placeholder="Parol" required>
+            <input  name="password" type="password" class="form-control" placeholder="Password" required>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Kirish</button>
+        <a href="/dashboard" type="submit" class="btn btn-primary w-100">Kirish</a>
     </form>
 
     <!-- Additional Links -->

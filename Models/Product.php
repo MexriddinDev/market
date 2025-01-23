@@ -20,4 +20,5 @@ class Product extends DB
         ]);
     }
 
+
 }

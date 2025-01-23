@@ -22,14 +22,18 @@ class storeController {
 
             if ($name && $description && $price && $stock) {
                 $this->product->store($name, $description, $price, $stock);
-                echo "<div style='padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 10px; margin-top: 20px; text-align: center; font-size: 18px; font-weight: bold;'>
-            Mahsulot muvaffaqiyatli saqlandi!
-          </div>";
+                header('Location: /products');
             } else {
                 echo "<div style='padding: 15px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 10px; margin-top: 20px; text-align: center; font-size: 18px; font-weight: bold;'>
             Barcha maydonlarni to‘ldiring!
+          </div>
+          <div class='add-another' style='text-align: center; margin-top: 20px;'>
+              <button type='button' onclick=\"document.getElementById('productForm').reset(); document.getElementById('name').focus();\" style='padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;'>
+                  Yana Mahsulot Qo'shish
+              </button>
           </div>";
             }
+
 
         }
     }
