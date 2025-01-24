@@ -57,5 +57,27 @@ class Product extends DB
         return true;
     }
 
+    public function updateProduct(int $id, string $name, string $description, float $price, int $stock) {
+        $query = "UPDATE products 
+                SET name = :name, 
+                    description = :description, 
+                    price = :price, 
+                    stock = :stock 
+                WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([
+            'id' => $id,
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'stock' => $stock
+        ]);
+        if ($stmt->rowCount() === 0) {
+            throw new \RuntimeException('Failed to update product');
+
+        }
+        return true;
+    }
+
 
 }

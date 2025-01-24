@@ -46,6 +46,11 @@ $router->post('/deleteProduct', function() {
     $controller->deleteProduct();
 });
 
+$router->post('/updateProduct', function() {
+    $controller = new Controller\storeController();
+    $controller->updateProduct();
+});
+
 
 
 
