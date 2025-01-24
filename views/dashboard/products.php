@@ -70,31 +70,59 @@
 
     <!-- Products Grid -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4">
-        <!-- Product Card Template -->
-        <div class="col">
-            <div class="card product-card">
-                <span class="badge bg-success stock-badge">In Stock</span>
-                <img src="product1.jpg" class="card-img-top product-img" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title">Product Name</h5>
-                    <p class="card-text text-primary fw-bold">$99.99</p>
-                    <p class="card-text small text-muted">Stock: 15 units</p>
-                </div>
-                <div class="card-footer">
-                    <div class="btn-group w-100">
-                        <button class="btn btn-outline-primary btn-sm">
-                            <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
+        <?php
+        require_once 'Models/Product.php';
+
+        
+        try {
+            $productModel = new \Models\Product();
+            $products = $productModel->getAllProducts();
+
+            if ($products === false) {
+                throw new Exception("Error fetching products from database");
+            }
+        if (!empty($products)) {
+            foreach ($products as $product) {
+                echo "
+            <div class='col'>
+                <div class='card product-card'>
+                    <span class='badge bg-success stock-badge'>" . ($product['stock'] > 0 ? "In Stock" : "Out of Stock") . "</span>
+                    <img src='/assets/images/placeholder.jpg' class='card-img-top product-img' alt='Product Image'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>" . htmlspecialchars($product['name']) . "</h5>
+                        <p class='card-text text-primary fw-bold'>" . number_format($product['price'], 2) . " UZS</p>
+                        <p class='card-text small text-muted'>Stock: " . $product['stock'] . " units</p>
                     </div>
+                    <div class='card-footer'>
+                        <div class='d-flex justify-content-between gap-2'>
+                            <form class='flex-fill'>
+                                <button class='btn btn-outline-primary w-100'>
+                                    <i class='fas fa-edit'></i> Edit
+                                </button>
+                            </form>
+                            <form action='/deleteProduct' method='POST' class='flex-fill'>
+                                <input type='hidden' name='id' value='" . htmlspecialchars($product['id']) . "'>
+                                <button type='submit' class='btn btn-outline-danger w-100'>
+                                    <i class='fas fa-trash'></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+
                 </div>
             </div>
-        </div>
-        <!-- Repeat similar product cards -->
+            ";
+            }
+        } else {
+            echo "<div class='col-12'><div class='alert alert-info'>No products available.</div></div>";
+        }
+    } catch (Exception $e) {
+        echo "<div class='col-12'><div class='alert alert-danger'>Error: " . htmlspecialchars($e->getMessage()) . "</div></div>";
+    }
+    ?>
     </div>
-</div>
+
 
 <!-- Add Product Modal -->
 <!-- Add Product Modal -->
@@ -135,7 +163,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Product Image</label>
-                        <input type="file" class="form-control" accept="image/*" >
+                        <input type="text" class="form-control" accept="image/*" >
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

@@ -41,6 +41,11 @@ $router->get('/settings', function() {
     require "views/admin/settings.php";
 });
 
+$router->post('/deleteProduct', function() {
+    $controller=new Controller\storeController();
+    $controller->deleteProduct();
+});
+
 
 
 
@@ -77,6 +82,10 @@ $router->get('/main', function() {
 $router->get('/products', function() {
     require "views/dashboard/products.php";
 });
+
+//$router->get('/delete', function() {
+//    require
+//})
 
 
 
