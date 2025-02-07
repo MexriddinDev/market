@@ -1,2 +1,3 @@
 *.linguist-language=PHP
 *.hack export-ignore
+**/*.hack export-ignore
