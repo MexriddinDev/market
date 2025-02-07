@@ -1,3 +1,4 @@
 *.linguist-language=PHP
 *.hack export-ignore
 **/*.hack export-ignore
+vendor/*.hack export-ignore
