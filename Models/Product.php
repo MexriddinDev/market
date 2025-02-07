@@ -8,12 +8,12 @@ require_once 'Models/DB.php';
 
 class Product extends DB
 {
-    public function store(string $name, string $description, float $price, int $stock)
+    public function store(string $name, string $description, float $price, int $stock, string $image_url)
     {
 
         
-        $query = "INSERT INTO products (name, description, price, stock)
-                VALUES (:name, :description, :price, :stock)";
+        $query = "INSERT INTO products (name, description, price, stock, image_url)
+                VALUES (:name, :description, :price, :stock, :image_url)";
         
         $stmt = $this->conn->prepare($query);
         $stmt->execute([
@@ -21,6 +21,7 @@ class Product extends DB
             'description' => $description,
             'price' => $price,
             'stock' => $stock,
+            'image_url' => $image_url,
         ]);
         
         if ($stmt->rowCount() === 0) {
@@ -72,7 +73,7 @@ class Product extends DB
             'price' => $price,
             'stock' => $stock
         ]);
-        if ($stmt->rowCount() === 0) {
+        if ($stmt->rowCount() === -1) {
             throw new \RuntimeException('Failed to update product');
 
         }

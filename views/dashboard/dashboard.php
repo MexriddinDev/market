@@ -22,10 +22,10 @@
                     <i class="fas fa-home mr-2"></i> Dashboard
                 </a>
                 <a href="/products" class="block p-3 mb-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-box mr-2"></i> Products
+                    <i class="fas fa-box mr-2"></i> Mahsulotlar
                 </a>
-                <a href="inventory.php" class="block p-3 mb-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-warehouse mr-2"></i> Inventory
+                <a href="/dashboard/debt" class="block p-3 mb-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <i class="fas fa-warehouse mr-2"></i> Qarzlar
                 </a>
                 <a href="orders.php" class="block p-3 mb-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-shopping-cart mr-2"></i> Orders

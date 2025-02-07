@@ -22,7 +22,7 @@
             right: 10px;
         }
         .product-img {
-            height: 150px;
+            height: 180px;
             object-fit: cover;
         }
         .card-body {
@@ -35,6 +35,11 @@
         .card-footer {
             background: transparent;
             border-top: none;
+            padding: 0.5rem;
+        }
+        .btn-action {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
         }
         .search-box {
             max-width: 400px;
@@ -90,26 +95,28 @@
             }
             if (!empty($products)) {
                 foreach ($products as $product) {
+//                    dd($product['image_url']);
                     echo "
                         <div class='col'>
                             <div class='card product-card'>
                                 <span class='badge bg-success stock-badge'>" . ($product['stock'] > 0 ? "In Stock" : "Out of Stock") . "</span>
-                                <img src='/assets/images/placeholder.jpg' class='card-img-top product-img' alt='Product Image'>
+                                 
+                                <img src='" . ($product['image_url']) ."' class='card-img-top product-img' alt='Product Image'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>" . htmlspecialchars($product['name']) . "</h5>
-                                    <p class='card-text text-primary fw-bold'>" . number_format($product['price'], 2) . " UZS</p>
-                                    <p class='card-text small text-muted'>Stock: " . $product['stock'] . " units</p>
+                                    <p class='card-text text-primary fw-bold'>" . number_format($product['price']) . " UZS</p>
+                                    <p class='card-text small text-muted'>Stock: " . $product['stock'] . "  kg</p>
+                                    
                                 </div>
-                                <div class='card-footer'>
-                                    <div class='d-flex justify-content-between gap-2'>
-                                        <button type='button' class='btn btn-outline-primary w-100' onclick='editProduct(" . json_encode($product) . ")'>
-                                            <i class='fas fa-edit'></i> Edit
+                                <div class='card-footer p-2'>
+                                    <div class='d-flex gap-1'>
+                                        <button type='button' class='btn btn-outline-primary btn-action flex-grow-1' onclick='editProduct(" . json_encode($product) . ")'>
+                                            <i class='fas fa-edit'></i>
                                         </button>
-                                        <!-- Delete Form -->
-                                        <form action='/deleteProduct' method='POST' class='flex-fill'>
+                                        <form action='/deleteProduct' method='POST' class='flex-grow-1'>
                                             <input type='hidden' name='id' value='" . htmlspecialchars($product['id']) . "'>
-                                            <button type='submit' class='btn btn-outline-danger w-100'>
-                                                <i class='fas fa-trash'></i> Delete
+                                            <button type='submit' class='btn btn-outline-danger btn-action w-100'>
+                                                <i class='fas fa-trash'></i>
                                             </button>
                                         </form>
                                     </div>
@@ -165,7 +172,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Product Image</label>
-                            <input type="file" name="image" class="form-control" accept="image/*" required>
+                            <input type="text" name="image_url" class="form-control" accept="image/*"  required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -186,23 +193,44 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/updateProduct" method="POST">
+                    <form action="/updateProduct" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id">
+                        <div class="mb-3">
+                            <label class="form-label">Product Image</label>
+                            <input type="text" name="image" class="form-control" accept="image/*">
+                            <div id="currentImage" class="mt-2">
+                                <small class="text-muted">Current image will be kept if no new image is uploaded</small>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Product Name</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>
-                            <input type="text" name="description" class="form-control" required>
+                            <textarea name="description" class="form-control" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Price</label>
-                            <input type="number" name="price" class="form-control" required>
+                            <div class="input-group">
+                                <input type="number" name="price" class="form-control" required>
+                                <span class="input-group-text">UZS</span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Stock Quantity</label>
                             <input type="number" name="stock" class="form-control" required>
+                            <div class="form-text">Available units in stock</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Unit</label>
+                            <select class="form-select" name="unit" required>
+                                <option value="" disabled>Select unit</option>
+                                <option value="piece">Piece</option>
+                                <option value="kg">Kilogram</option>
+                                <option value="liter">Liter</option>
+                                <option value="box">Box</option>
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -222,6 +250,18 @@
             modal.querySelector('[name="description"]').value = product.description;
             modal.querySelector('[name="price"]').value = product.price;
             modal.querySelector('[name="stock"]').value = product.stock;
+            modal.querySelector('[name="unit"]').value = product.unit;
+            
+            // Show current image preview
+            const currentImage = modal.querySelector('#currentImage');
+            if (product.image_url) {
+                currentImage.innerHTML = `
+                    <img src="${product.image_url}" alt="Current product image" 
+                        style="max-width: 100px; height: auto;" class="mt-2">
+                    <small class="text-muted d-block">Current image</small>
+                `;
+            }
+            
             new bootstrap.Modal(modal).show();
         }
     </script>
