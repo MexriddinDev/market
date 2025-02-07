@@ -11,7 +11,7 @@ class adminsController
 
 
 
-    public function login(string $login, string $password, bool $active) {
+    public function login() {
         $this->admin= new Admin();
         $user = new Admin();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

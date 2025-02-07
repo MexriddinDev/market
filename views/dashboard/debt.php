@@ -88,7 +88,7 @@
         <!-- Qarz qo'shish formasi -->
         <div class="col-md-4 mb-4">
             <h4>Add New Debt</h4>
-            <form action="/dashboard/debtStore" method="POST">
+            <form action="/dashboard/debt" method="POST">
                 <div class="mb-3">
                     <label for="full_name" class="form-label">Full Name</label>
                     <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter full name" required>

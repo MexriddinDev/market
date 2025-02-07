@@ -6,7 +6,7 @@ use Models\Debt;
 class debtController
 {
     private $debt;
-    public function __construct(Debt $debt){
+    public function __construct(){
         $this->debt =new Debt();
     }
 public function debt(){
@@ -56,7 +56,7 @@ public function debt(){
                 throw new \RuntimeException('Failed to update debt');
 
             }
-            return true;
+
         }
     }
 

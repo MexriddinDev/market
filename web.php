@@ -145,10 +145,10 @@ $router->post('/saveProduct', function() {
     $controller->saveProduct();
 });
 $router->get('/', function() {
-    require "views/home.php";});
+    require "views/dashboard/home.php";});
 
 $router->get('/login', function() {
-    require "views/login.php";});
+    require "views/dashboard/login.php";});
 
 $router->post('/login', function() {
     $controller=new Controller\userController();
