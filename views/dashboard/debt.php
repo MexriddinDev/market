@@ -146,7 +146,7 @@
                     <th>Issue Date</th>
                     <th>Due Date</th>
                     <th>Status</th>
-                    <th>Actions</th>
+
                 </tr>
                 </thead>
                 <tbody id="debt-list">
@@ -193,22 +193,22 @@
         });
 
         document.getElementById('total-debt').textContent = totalDebt.toFixed(2);
-    }
-
-    // Qarzni to'langan deb belgilash
-    function markAsPaid(index) {
-        debts[index].payment_status = 'Paid';
-        renderDebtList();
-    }
+    // }
+    //
+    // // Qarzni to'langan deb belgilash
+    // function markAsPaid(index) {
+    //     debts[index].payment_status = 'Paid';
+    //     renderDebtList();
+    // }
 
     // Qidiruv funksiyasi
-    document.getElementById('search-debt').addEventListener('input', function() {
-        const searchValue = this.value.toLowerCase();
-        const filteredDebts = debts.filter(debt =>
-            debt.full_name.toLowerCase().includes(searchValue) ||
-            debt.phone_number.includes(searchValue)
-        );
-        renderFilteredList(filteredDebts);
-    });
+    // document.getElementById('search-debt').addEventListener('input', function() {
+    //     const searchValue = this.value.toLowerCase();
+    //     const filteredDebts = debts.filter(debt =>
+    //         debt.full_name.toLowerCase().includes(searchValue) ||
+    //         debt.phone_number.includes(searchValue)
+    //     );
+    //     renderFilteredList(filteredDebts);
+    // });
 
-    function renderFilteredList(filteredDebts) {
+

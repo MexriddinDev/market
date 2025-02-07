@@ -12,7 +12,7 @@ class userController
 
 
 
-    public function login(string $login, string $password, bool $active) {
+    public function login() {
         $this->user= new Users();
         $user = new Users();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

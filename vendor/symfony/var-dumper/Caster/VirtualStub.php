@@ -11,17 +11,11 @@
 
 namespace Symfony\Component\VarDumper\Caster;
 
-use Symfony\Component\VarDumper\Cloner\Stub;
-
-/**
- * Represents any arbitrary value.
- *
- * @author Alexandre Daubois <alex.daubois@gmail.com>
- */
-class ScalarStub extends Stub
+class VirtualStub extends ConstStub
 {
-    public function __construct(mixed $value)
+    public function __construct(\ReflectionProperty $property)
     {
-        $this->value = $value;
+        parent::__construct('~'.($property->hasType() ? ' '.$property->getType() : ''), 'Virtual property');
+        $this->attr['virtual'] = true;
     }
 }

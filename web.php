@@ -1,218 +1,27 @@
 <?php
-//use Controller\userController;
-//use Controller\storeController;
-//use Controller\adminsController;
-//
-//
-//require "Router.php";
-//
-//// Router obyektini yaratish
-//$router = new Router();
-//
-//
-//$router->get('/', function() { require "views/home.php"; });
-//$router->get('/login', function() { require "views/login.php"; });
-//$router->get('/admin', function() { require "views/admin/admin-panel.php"; });
-//$router->get('/management', function() { require "views/admin/user-management.php"; });
-//$router->get('/active-monitoring', function() { require "views/admin/activity-monitoring.php"; });
-//$router->get('/settings', function() { require "views/admin/settings.php"; });
-//$router->get('/dashboard/debt', function() { require "views/dashboard/debt.php"; });
-//$router->get('/about', function() { require "views/about.php"; });
-//$router->get('/buy', function() { require "views/buy.php"; });
-//$router->get('/buypage', function() { require "views/buypage.php"; });
-//$router->get('/products', function() { require "views/dashboard/products.php"; });
-//$router->get('/dashboard', function() { require "views/dashboard/dashboard.php"; });
-//$router->get('/main', function() { require "views/main.php"; });
-//
-//
-//
-//
-//// POST marshrutlar
-//$router->post('/saveProduct', function() {
-//    $controller = new storeController();
-//    $controller->saveProduct();
-//});
-//
-//$router->post('/login', function() {
-//    $controller = new userController();
-//    $controller->login();
-//});
-//
-//$router->post('/deleteProduct', function() {
-//    $controller = new storeController();
-//    $controller->deleteProduct();
-//});
-//
-//$router->post('/updateProduct', function() {
-//    $controller = new storeController();
-//    $controller->updateProduct();
-//});
-//
-//$router->post('/admin/login', function() {
-//    $controller = new adminsController();
-//    $controller->login();
-//});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//require 'views/productAdd.php';
-use Controller\userController;
 
 require "Router.php";
 require "Controller/storeController.php";
+require "Controller/debtController.php";
 
-
+// Router obyektini yaratish
 $router = new Router();
 
-
-$router->post('/saveProduct', function() {
-    $controller = new Controller\storeController();
-    $controller->saveProduct();
-});
-$router->get('/', function() {
-    require "views/dashboard/home.php";});
-
-$router->get('/login', function() {
-    require "views/dashboard/login.php";});
-
-$router->post('/login', function() {
-    $controller=new Controller\userController();
-    $controller->login();
-});
-
-$router->get('/admin', function() {
-    require "views/admin/admin-panel.php";
-});
-
-$router->get('/management', function() {
-    require "views/admin/user-management.php";
-});
-
-$router->get('/active-monitoring', function() {
-    require "views/admin/activity-monitoring.php";
-});
-
-$router->get('/settings', function() {
-    require "views/admin/settings.php";
-});
-
-$router->post('/deleteProduct', function() {
-    $controller=new Controller\storeController();
-    $controller->deleteProduct();
-});
-
-$router->post('/updateProduct', function() {
-    $controller = new Controller\storeController();
-    $controller->updateProduct();
-});
-
-
-$router->get('/admin', function() {
-    require "views/admin/login.php";
-});
-
-$router->post('/admin', function() {
-    $controller=new Controller\adminsController();
-    $controller->login();
-});
-
-$router->get('/dashboard/debt', function() {
-    require "views/dashboard/debt.php";
-});
-//
-//
-$router->post('/dashboard/debt', function() {
-    $controller=new Controller\debtController();
-    $controller->debt();
-});
-
-
-
-
-
-
-
-
-
-//$router->post('/dashboard/debt', function() {
-//    $controller = new Controller\debtController();
-//    $controller->debt();
-//});
+// GET marshrutlar
+$router->get('/', fn() => require "views/dashboard/home.php");
+$router->get('/login', fn() => require "views/dashboard/login.php");
+$router->get('/admin', fn() => require "views/admin/admin-panel.php");
+$router->get('/management', fn() => require "views/admin/user-management.php");
+$router->get('/active-monitoring', fn() => require "views/admin/activity-monitoring.php");
+$router->get('/settings', fn() => require "views/admin/settings.php");
+$router->get('/dashboard/debt', fn() => require "views/dashboard/debt.php");
+$router->get('/about', fn() => require "views/dashboard/about.php");
+$router->get('/buy', fn() => require "views/dashboard/buy.php");
+$router->get('/buypage', fn() => require "views/dashboard/buypage.php");
+$router->get('/products', fn() => require "views/dashboard/products.php");
+$router->get('/dashboard', fn() => require "views/dashboard/dashboard.php");
+$router->get('/main', fn() => require "views/main.php");
+$router->get('/admin', fn() => require "views/admin/login.php");
 
 
 
@@ -225,60 +34,12 @@ $router->post('/dashboard/debt', function() {
 
 
 
-
-
-
-
-
-
-
-
-$router->get('/about', function() {
-    require "views/about.php";
-});
-$router->get('/buy', function() {
-    require "views/buy.php";
-});
-$router->get('/buypage', function() {
-    require "views/buypage.php";
-});
-$router->get('/products', function() {
-    require "views/dashboard/products.php";
-});
-$router->get('/dashboard', function() {
-    require "views/dashboard/dashboard.php";
-});
-$router->get('/main', function() {
-    require "views/main.php";
-});
-
-$router->get('/products', function() {
-    require "views/dashboard/products.php";
-});
-
-//$router->get('/delete', function() {
-//    require
-//})
-//
-//
-//
-//
-//
-//
-//
-////$router->get('/customer', function() {
-////    require "views/dashboard/customers.php";
-////});
-////$router->get('/inventory', function() {
-////    require "views/dashboard/inventory.php";
-////});
-////$router->get('/order', function() {
-////    require "views/dashboard/orders.php";
-////});
-////$router->get('/suppliers', function() {
-////    require "views/dashboard/suppliers.php";
-////});
-////$router->get('/setting', function() {
-////    require "views/dashboard/settings.php";
-////});
-//
+// POST marshrutlar
+$router->post('/saveProduct', fn() => (new Controller\storeController())->saveProduct());
+$router->post('/login', fn() => (new Controller\userController())->login());
+$router->post('/deleteProduct', fn() => (new Controller\storeController())->deleteProduct());
+$router->post('/updateProduct', fn() => (new Controller\storeController())->updateProduct());
+$router->post('/admin', fn() => (new Controller\adminsController())->login());
+$router->post('/dashboard/debt', fn() => (new Controller\debtController())->debt());
+$router->post('/dashboard/debtUpdate', fn() => (new Controller\debtController())->debtUpdate());
+$router->post('/dashboard/debtDelete', fn() => (new Controller\debtController())->debtDelete());
