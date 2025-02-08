@@ -3,6 +3,7 @@
 require "Router.php";
 require "Controller/storeController.php";
 require "Controller/debtController.php";
+require "Controller/userController.php";
 
 // Router obyektini yaratish
 $router = new Router();
@@ -21,7 +22,7 @@ $router->get('/buypage', fn() => require "views/dashboard/buypage.php");
 $router->get('/products', fn() => require "views/dashboard/products.php");
 $router->get('/dashboard', fn() => require "views/dashboard/dashboard.php");
 $router->get('/main', fn() => require "views/main.php");
-$router->get('/admin', fn() => require "views/admin/login.php");
+$router->get('/admin', fn() => require "views/admin/adminLogin.php");
 
 
 

@@ -112,12 +112,13 @@
     <!-- Login Form -->
     <form METHOD="POST">
         <div class="mb-4">
-            <input name="login" type="text" class="form-control" placeholder="Login" required>
+            <input id="login" name="login" type="text" class="form-control" placeholder="Login" required>
         </div>
         <div class="mb-4">
-            <input  name="password" type="password" class="form-control" placeholder="Password" required>
+            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
         </div>
-        <a href="/dashboard" type="submit" class="btn btn-primary w-100">Kirish</a>
+<!--        <button type="submit">KIRISH</button>-->
+        <button  type="submit" class="btn btn-primary w-100">Kirish</button>
     </form>
 
     <!-- Additional Links -->

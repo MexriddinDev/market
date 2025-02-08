@@ -112,10 +112,10 @@
     <!-- Login Form -->
     <form METHOD="POST">
         <div class="mb-4">
-            <input name="login" type="text" class="form-control" placeholder="Login" required>
+            <input name="adminlogin" type="text" class="form-control" placeholder="Login" required>
         </div>
         <div class="mb-4">
-            <input  name="password" type="password" class="form-control" placeholder="Password" required>
+            <input  name="adminpassword" type="password" class="form-control" placeholder="Password" required>
         </div>
         <a href="/admin" type="submit" class="btn btn-primary w-100">Kirish</a>
     </form>

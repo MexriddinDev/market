@@ -55,6 +55,19 @@ class Debt extends DB
         }
         return true;
     }
+    public function getAllDebts()
+    {
+        $query = "SELECT * FROM debts";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        if ($stmt->rowCount() === 0) {
+            throw new \RuntimeException('Failed to retrieve debts');
+
+        }
+        return $stmt->fetchAll();
+
+
+    }
 
     public function deleteDebt(int $id)
     {
